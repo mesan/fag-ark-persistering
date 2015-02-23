@@ -1,5 +1,3 @@
-package no.mesan.arkitektur.persistering.neo4J;
-
 public class HelloWorld {
 
 	public static void main(String [] args) {
