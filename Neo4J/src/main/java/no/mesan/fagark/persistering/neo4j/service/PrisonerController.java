@@ -2,11 +2,16 @@ package no.mesan.fagark.persistering.neo4j.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import no.mesan.fagark.persistering.neo4j.domain.Friendship;
 import no.mesan.fagark.persistering.neo4j.domain.Prisoner;
 import no.mesan.fagark.persistering.neo4j.domain.PrisonerBuilder;
+import no.mesan.fagark.persistering.neo4j.dto.FriendshipDto;
 import no.mesan.fagark.persistering.neo4j.dto.PrisonerDto;
 import no.mesan.fagark.persistering.neo4j.dto.PrisonerDtoBuilder;
+import no.mesan.fagark.persistering.neo4j.repository.FriendshipRepository;
 import no.mesan.fagark.persistering.neo4j.repository.PrisonerRepository;
 
 import org.neo4j.graphdb.Transaction;
@@ -24,6 +29,9 @@ public class PrisonerController {
 
 	@Autowired
 	PrisonerRepository prisonerRepository;
+
+	@Autowired
+	FriendshipRepository friendshipRepository;
 
 	@Autowired
 	GraphDatabase graphDatabase;
@@ -91,8 +99,8 @@ public class PrisonerController {
 	@RequestMapping(method = RequestMethod.GET, value = "/findAll")
 	public List<PrisonerDto> getAllPrisoners() {
 		try (Transaction tx = graphDatabase.beginTx()) {
-			final List<PrisonerDto> dtos = new ArrayList<PrisonerDto>();
 
+			final List<PrisonerDto> dtos = new ArrayList<>();
 			prisonerRepository.findAll().forEach(
 					prisoner -> {
 						final PrisonerDto dto = PrisonerDtoBuilder.buildFrom(
@@ -103,6 +111,59 @@ public class PrisonerController {
 			tx.success();
 
 			return dtos;
+		}
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "addFriendship")
+	public FriendshipDto addFriendship(@RequestBody FriendshipDto friends) {
+		try (Transaction tx = graphDatabase.beginTx()) {
+
+			Prisoner friend1 = prisonerRepository.findOne(friends.getFriend1()
+					.getId());
+			if (friend1 == null) {
+				throw new IllegalArgumentException("No prisoner with ID = "
+						+ friends.getFriend1() + " exists!");
+			}
+
+			Prisoner friend2 = prisonerRepository.findOne(friends.getFriend2()
+					.getId());
+			if (friend2 == null) {
+				throw new IllegalArgumentException("No prisoner with ID = "
+						+ friends.getFriend2() + " exists!");
+			}
+
+			Friendship friendship = Friendship.from(friend1, friend2);
+
+			Friendship result = friendshipRepository.save(friendship);
+
+			// Fetch the actual prisoners.
+			Friendship ret = new Friendship(
+					result.getId(),
+					prisonerRepository.findOne(result.getFriend1().getNodeId()),
+					prisonerRepository.findOne(result.getFriend2().getNodeId()));
+
+			FriendshipDto dto = FriendshipDto.from(ret);
+
+			tx.success();
+
+			return dto;
+		}
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "findFriends")
+	public Set<PrisonerDto> getFriends(
+			@RequestParam("prisonerId") Long prisonerId) {
+		try (Transaction tx = graphDatabase.beginTx()) {
+
+			Set<PrisonerDto> friends = prisonerRepository.findOne(prisonerId)
+					.getFriends().stream()
+					.map(p -> PrisonerDtoBuilder.buildFrom(p).build())
+					.collect(Collectors.toSet());
+
+			tx.success();
+
+			return friends;
+
 		}
 	}
 

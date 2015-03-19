@@ -1,6 +1,6 @@
-* PrisonerRepo
+# PrisonerRepo
 
-** Start
+## Start
 
 For å kjøre docker containeren (husk å velge port):
 
@@ -15,6 +15,6 @@ VBoxManage controlvm boot2docker-vm natpf1 "PrisonerRepoPort,tcp,127.0.0.1,8080,
 Testet ut på mac.
 
 
-Spring data Neo4j
+# Spring data Neo4j
 
 http://docs.spring.io/spring-data/data-neo4j/docs/3.2.2.RELEASE/reference/html/#tutorial_running

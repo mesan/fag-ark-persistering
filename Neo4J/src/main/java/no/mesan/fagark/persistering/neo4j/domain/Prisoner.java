@@ -1,7 +1,13 @@
 package no.mesan.fagark.persistering.neo4j.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.neo4j.graphdb.Direction;
+import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
 
 @NodeEntity
 public class Prisoner {
@@ -11,14 +17,13 @@ public class Prisoner {
 
 	private String name;
 
-	/*
-	 * @RelatedTo(type = "FRIEND", direction = Direction.OUTGOING) private
-	 * 
-	 * @Fetch Set<Prisoner> friends;
-	 * 
-	 * @RelatedTo(type = "ENEMY", direction = Direction.BOTH) private @Fetch
-	 * Set<Prisoner> enemies;
-	 */
+	@Fetch
+	@RelatedTo(type = "HAS_FRIEND", direction = Direction.BOTH)
+	private Set<Prisoner> friends;
+
+	// @RelatedTo(type = "HAS_ENEMY", direction = Direction.BOTH)
+	// @Fetch
+	// private Set<Prisoner> enemies;
 
 	public Prisoner() {
 	}
@@ -26,6 +31,9 @@ public class Prisoner {
 	public Prisoner(final Long nodeId, final String name) {
 		this.nodeId = nodeId;
 		this.name = name;
+
+		friends = new HashSet<>();
+		// enemies = new HashSet<>();
 	}
 
 	public Long getNodeId() {
@@ -36,25 +44,17 @@ public class Prisoner {
 		return name;
 	}
 
-	/*
-	 * public void addFriend(Prisoner friend) { if (friends == null) { friends =
-	 * new HashSet<Prisoner>(); } friends.add(friend); }
-	 * 
-	 * public void removeFriend(Prisoner prisoner) { if (friends != null) {
-	 * friends.remove(prisoner); } }
-	 * 
-	 * public void addEnemy(Prisoner enemy) { if (enemies == null) { enemies =
-	 * new HashSet<Prisoner>(); } enemies.add(enemy); }
-	 * 
-	 * public void removeEnemy(Prisoner prisoner) { if (enemies != null) {
-	 * enemies.remove(prisoner); } }
-	 * 
-	 * public boolean isFriend(Prisoner prisoner) { return
-	 * friends.contains(prisoner); }
-	 * 
-	 * public boolean isEnemy(Prisoner prisoner) { return
-	 * enemies.contains(prisoner); }
-	 */
+	public Set<Prisoner> getFriends() {
+		return friends;
+	}
+
+	public void addFriend(Prisoner friend) {
+		friends.add(friend);
+	}
+
+	// public Set<Prisoner> getEnemies() {
+	// return enemies;
+	// }
 
 	@Override
 	public String toString() {
