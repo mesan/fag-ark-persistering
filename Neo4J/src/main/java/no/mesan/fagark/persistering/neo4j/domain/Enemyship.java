@@ -5,48 +5,48 @@ import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.RelationshipEntity;
 import org.springframework.data.neo4j.annotation.StartNode;
 
-@RelationshipEntity(type = "HAS_FRIEND")
-public class Friendship {
+@RelationshipEntity(type = "HAS_ENEMY")
+public class Enemyship {
 
 	@GraphId
 	Long id;
 
 	@StartNode
-	private Prisoner friend1;
+	private Prisoner enemy1;
 	@EndNode
-	private Prisoner friend2;
+	private Prisoner enemy2;
 
-	Friendship() {
+	Enemyship() {
 	}
 
-	public Friendship(Long id, Prisoner friend1, Prisoner friend2) {
+	public Enemyship(Long id, Prisoner enemy1, Prisoner enemy2) {
 		this.id = id;
-		this.friend1 = friend1;
-		this.friend2 = friend2;
+		this.enemy1 = enemy1;
+		this.enemy2 = enemy2;
 	}
 
-	public static Friendship from(Prisoner friend1, Prisoner friend2) {
-		return new Friendship(null, friend1, friend2);
+	public static Enemyship from(Prisoner enemy1, Prisoner enemy2) {
+		return new Enemyship(null, enemy1, enemy2);
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public Prisoner getFriend1() {
-		return friend1;
+	public Prisoner getEnemy1() {
+		return enemy1;
 	}
 
-	public Prisoner getFriend2() {
-		return friend2;
+	public Prisoner getEnemy2() {
+		return enemy2;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((friend1 == null) ? 0 : friend1.hashCode());
-		result = prime * result + ((friend2 == null) ? 0 : friend2.hashCode());
+		result = prime * result + ((enemy1 == null) ? 0 : enemy1.hashCode());
+		result = prime * result + ((enemy2 == null) ? 0 : enemy2.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -62,19 +62,19 @@ public class Friendship {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Friendship other = (Friendship) obj;
-		if (friend1 == null) {
-			if (other.friend1 != null) {
+		Enemyship other = (Enemyship) obj;
+		if (enemy1 == null) {
+			if (other.enemy1 != null) {
 				return false;
 			}
-		} else if (!friend1.equals(other.friend1)) {
+		} else if (!enemy1.equals(other.enemy1)) {
 			return false;
 		}
-		if (friend2 == null) {
-			if (other.friend2 != null) {
+		if (enemy2 == null) {
+			if (other.enemy2 != null) {
 				return false;
 			}
-		} else if (!friend2.equals(other.friend2)) {
+		} else if (!enemy2.equals(other.enemy2)) {
 			return false;
 		}
 		if (id == null) {

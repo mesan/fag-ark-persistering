@@ -27,7 +27,7 @@ public class PrisonerRepo {
 	}
 
 	public static void main(String[] args) throws Exception {
-		
+
 		SpringApplication.run(PrisonerRepo.class, args);
 
 	}
