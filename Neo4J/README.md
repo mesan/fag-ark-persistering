@@ -2,6 +2,14 @@
 
 ## Start
 
+### Start opp en neo4j server på docker
+
+Velg et neo4j docker image, og kjør det. Dette imaget virker bra:
+
+docker run -itd -e NEO4J_AUTH=none --name neo4j -p 7474:7474 ahmetkizilay/docker-neo4j
+
+### Start opp rest-serveren
+
 For å kjøre docker containeren (husk å velge port):
 
 docker run -itd -p <din port>:8080 marstran/persistering-neo4j

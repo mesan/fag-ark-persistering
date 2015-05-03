@@ -2,8 +2,6 @@ package no.mesan.fagark.persistering.neo4j.dto;
 
 import java.util.Set;
 
-import no.mesan.fagark.persistering.neo4j.vo.Percent;
-
 public class PrisonerDto {
 
 	private Long id;
@@ -12,24 +10,24 @@ public class PrisonerDto {
 	private Set<Long> friends;
 	private Set<Long> enemies;
 
-	private Percent health;
+	private Integer health;
 	private boolean isDangerous;
-	private Percent hunger;
-	private Percent thirst;
-	private Percent aggression;
-	private Percent sosializable;
+	private Integer hunger;
+	private Integer thirst;
+	private Integer aggression;
+	private Integer sosializable;
 
 	public PrisonerDto() {
 	}
 
 	public PrisonerDto(final Long id,
 			final String name,
-			final Percent health,
+			final Integer health,
 			final boolean isDangerous,
-			final Percent hunger,
-			final Percent thirst,
-			final Percent aggression,
-			final Percent sosializable,
+			final Integer hunger,
+			final Integer thirst,
+			final Integer aggression,
+			final Integer sosializable,
 			final Set<Long> friends,
 			final Set<Long> enemies) {
 		this.id = id;
@@ -54,7 +52,7 @@ public class PrisonerDto {
 		return name;
 	}
 
-	public Percent getHealth() {
+	public Integer getHealth() {
 		return health;
 	}
 
@@ -62,19 +60,19 @@ public class PrisonerDto {
 		return isDangerous;
 	}
 
-	public Percent getHunger() {
+	public Integer getHunger() {
 		return hunger;
 	}
 
-	public Percent getThirst() {
+	public Integer getThirst() {
 		return thirst;
 	}
 
-	public Percent getAggression() {
+	public Integer getAggression() {
 		return aggression;
 	}
 
-	public Percent getSosializable() {
+	public Integer getSosializable() {
 		return sosializable;
 	}
 

@@ -48,10 +48,10 @@ public class PrisonerController {
 		if (prisoner.getName() == null) {
 			throw new IllegalArgumentException("Prisoner must have a name.");
 		}
-
+		
 		try (Transaction tx = graphDatabase.beginTx()) {
 			final Prisoner toInsert = PrisonerBuilder.buildFrom(prisoner).build();
-
+			
 			final Prisoner saved = prisonerRepository.save(toInsert);
 
 			if (saved == null) {

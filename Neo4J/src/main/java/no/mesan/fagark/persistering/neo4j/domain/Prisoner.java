@@ -3,8 +3,6 @@ package no.mesan.fagark.persistering.neo4j.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import no.mesan.fagark.persistering.neo4j.vo.Percent;
-
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
@@ -21,12 +19,12 @@ public class Prisoner {
 	@Indexed(unique = true)
 	private String name;
 
-	private Percent health;
+	private Integer health;	
 	private boolean isDangerous;
-	private Percent hunger;
-	private Percent thirst;
-	private Percent aggression;
-	private Percent sosializable;
+	private Integer hunger;
+	private Integer thirst;
+	private Integer aggression;
+	private Integer sosializable;
 
 	@Fetch
 	@RelatedTo(type = "HAS_FRIEND", direction = Direction.BOTH)
@@ -41,14 +39,21 @@ public class Prisoner {
 
 	public Prisoner(final Long nodeId,
 			final String name,
-			final Percent health,
+			final Integer health,
 			final boolean isDangerous,
-			final Percent hunger,
-			final Percent thirst,
-			final Percent aggression,
-			final Percent sosializable) {
+			final Integer hunger,
+			final Integer thirst,
+			final Integer aggression,
+			final Integer sosializable) {
 		this.nodeId = nodeId;
 		this.name = name;
+		
+		this.health = health;
+		this.isDangerous = isDangerous;
+		this.hunger = hunger;
+		this.thirst = thirst;
+		this.aggression = aggression;
+		this.sosializable = sosializable;
 
 		friends = new HashSet<>();
 		enemies = new HashSet<>();
@@ -62,7 +67,7 @@ public class Prisoner {
 		return name;
 	}
 
-	public Percent getHealth() {
+	public Integer getHealth() {
 		return health;
 	}
 
@@ -70,19 +75,19 @@ public class Prisoner {
 		return isDangerous;
 	}
 
-	public Percent getHunger() {
+	public Integer getHunger() {
 		return hunger;
 	}
 
-	public Percent getThirst() {
+	public Integer getThirst() {
 		return thirst;
 	}
 
-	public Percent getAggression() {
+	public Integer getAggression() {
 		return aggression;
 	}
 
-	public Percent getSosializable() {
+	public Integer getSosializable() {
 		return sosializable;
 	}
 

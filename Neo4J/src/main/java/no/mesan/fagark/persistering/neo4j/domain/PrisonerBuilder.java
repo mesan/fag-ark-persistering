@@ -1,19 +1,18 @@
 package no.mesan.fagark.persistering.neo4j.domain;
 
 import no.mesan.fagark.persistering.neo4j.dto.PrisonerDto;
-import no.mesan.fagark.persistering.neo4j.vo.Percent;
 
 public class PrisonerBuilder {
 
 	private Long nodeId;
 	private String name;
 
-	private Percent health;
+	private Integer health;
 	private boolean isDangerous;
-	private Percent hunger;
-	private Percent thirst;
-	private Percent aggression;
-	private Percent sosializable;
+	private Integer hunger;
+	private Integer thirst;
+	private Integer aggression;
+	private Integer sosializable;
 
 	public static PrisonerBuilder builder() {
 		return new PrisonerBuilder();
@@ -51,7 +50,7 @@ public class PrisonerBuilder {
 		return this;
 	}
 
-	public PrisonerBuilder health(final Percent health) {
+	public PrisonerBuilder health(final Integer health) {
 		this.health = health;
 		return this;
 	}
@@ -61,22 +60,22 @@ public class PrisonerBuilder {
 		return this;
 	}
 
-	public PrisonerBuilder hunger(final Percent hunger) {
+	public PrisonerBuilder hunger(final Integer hunger) {
 		this.hunger = hunger;
 		return this;
 	}
 
-	public PrisonerBuilder thirst(final Percent thirst) {
+	public PrisonerBuilder thirst(final Integer thirst) {
 		this.thirst = thirst;
 		return this;
 	}
 
-	public PrisonerBuilder aggression(final Percent aggression) {
+	public PrisonerBuilder aggression(final Integer aggression) {
 		this.aggression = aggression;
 		return this;
 	}
 
-	public PrisonerBuilder sosializable(final Percent sosializable) {
+	public PrisonerBuilder sosializable(final Integer sosializable) {
 		this.sosializable = sosializable;
 		return this;
 	}

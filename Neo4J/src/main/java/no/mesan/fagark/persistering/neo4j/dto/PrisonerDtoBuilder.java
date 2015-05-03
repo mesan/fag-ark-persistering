@@ -5,19 +5,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import no.mesan.fagark.persistering.neo4j.domain.Prisoner;
-import no.mesan.fagark.persistering.neo4j.vo.Percent;
 
 public class PrisonerDtoBuilder {
 
 	private Long id;
 	private String name;
 
-	private Percent health;
+	private Integer health;
 	private boolean isDangerous;
-	private Percent hunger;
-	private Percent thirst;
-	private Percent aggression;
-	private Percent sosializable;
+	private Integer hunger;
+	private Integer thirst;
+	private Integer aggression;
+	private Integer sosializable;
 
 	Set<Long> friendIds;
 	Set<Long> enemyIds;
@@ -92,7 +91,7 @@ public class PrisonerDtoBuilder {
 		return this;
 	}
 
-	public PrisonerDtoBuilder health(final Percent health) {
+	public PrisonerDtoBuilder health(final Integer health) {
 		this.health = health;
 		return this;
 	}
@@ -102,22 +101,22 @@ public class PrisonerDtoBuilder {
 		return this;
 	}
 
-	public PrisonerDtoBuilder hunger(final Percent hunger) {
+	public PrisonerDtoBuilder hunger(final Integer hunger) {
 		this.hunger = hunger;
 		return this;
 	}
 
-	public PrisonerDtoBuilder thirst(final Percent thirst) {
+	public PrisonerDtoBuilder thirst(final Integer thirst) {
 		this.thirst = thirst;
 		return this;
 	}
 
-	public PrisonerDtoBuilder aggression(final Percent aggression) {
+	public PrisonerDtoBuilder aggression(final Integer aggression) {
 		this.aggression = aggression;
 		return this;
 	}
 
-	public PrisonerDtoBuilder sosializable(final Percent sosializable) {
+	public PrisonerDtoBuilder sosializable(final Integer sosializable) {
 		this.sosializable = sosializable;
 		return this;
 	}
