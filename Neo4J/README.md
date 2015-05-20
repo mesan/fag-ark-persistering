@@ -4,7 +4,7 @@
 
 ### Start opp en neo4j server på docker
 
-Velg et neo4j docker image, og kjør det. Dette imaget virker bra:
+Velg et neo4j docker image, og kjør det. Jeg har ikke funnet noe offisielt Neo4j image, men dette imaget virker bra:
 
 docker run -itd -e NEO4J_AUTH=none --name neo4j -p 7474:7474 ahmetkizilay/docker-neo4j
 
@@ -22,6 +22,81 @@ VBoxManage controlvm boot2docker-vm natpf1 "PrisonerRepoPort,tcp,127.0.0.1,8080,
 
 Testet ut på mac.
 
+# REST API
+
+## POST /prisoner/insert
+
+Setter inn en fange. Fangen må ha et navn.
+Dersom ID finnes fra før, så vil fangen bli oppdatert.
+Dersom ID ikke er gitt, så vil den bli generert. Innsatt fange vil bli
+returnert.
+
+### Body-eksempel
+
+{
+	"id": "1",
+	"name": "Billy the Kid",
+	"health": 100,
+	"isDangerous": true,
+	"hunger": 50,
+	"thirst": 20,
+	"aggression": 100,
+	"sosializable": 0
+}
+
+## GET /prisoner/findById?nodeId=<nodeId>
+
+Henter en fange på ID.
+
+## GET /prisoner/findByName?name=<name>
+
+Henter en fange på navn.
+
+## GET /prisoner/findAll
+
+Henter alle fanger.
+
+## POST /prisoner/addFriendship
+
+Legger til et vennskap. Dersom fangen ikke finnes, vil
+den bli lagt til (?).
+
+### Body-eksempel
+
+{
+	{
+		"id": "1",
+		"name": "Billy the Kid",
+		"health": 100,
+		"isDangerous": true,
+		"hunger": 50,
+		"thirst": 20,
+		"aggression": 100,
+		"sosializable": 0
+	},
+	{
+		"id": "2",
+		"name": "Lucky Lule",
+		"health": 100,
+		"isDangerous": false,
+		"hunger": 0,
+		"thirst": 0,
+		"aggression": 20,
+		"sosializable": 100
+	}
+}
+
+## GET /prisoner/getFriendsById?nodeId=<nodeId>
+
+Returnerer en liste av fanger som er venn med fangen med den gitte ID'en.
+
+## POST /prisoner/addEnemies
+
+Legger til et fiendeskap. Se addFriendship (samme requestbody).
+
+## GET /prisoner/getEnemiesById?nodeId=<nodeId>
+
+Returnerer en liste av fanger som er fiende med fangen med den gitte ID'en.
 
 # Spring data Neo4j
 
