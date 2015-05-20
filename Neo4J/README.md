@@ -32,7 +32,7 @@ Dersom ID ikke er gitt, så vil den bli generert. Innsatt fange vil bli
 returnert.
 
 ### Body-eksempel
-
+```json
 {
 	"id": "1",
 	"name": "Billy the Kid",
@@ -43,12 +43,12 @@ returnert.
 	"aggression": 100,
 	"sosializable": 0
 }
-
-## GET /prisoner/findById?nodeId=<nodeId>
+```
+## GET /prisoner/findById?nodeId=\<nodeId\>
 
 Henter en fange på ID.
 
-## GET /prisoner/findByName?name=<name>
+## GET /prisoner/findByName?name=\<name\>
 
 Henter en fange på navn.
 
@@ -62,7 +62,7 @@ Legger til et vennskap. Dersom fangen ikke finnes, vil
 den bli lagt til (?).
 
 ### Body-eksempel
-
+```json
 {
 	{
 		"id": "1",
@@ -85,8 +85,9 @@ den bli lagt til (?).
 		"sosializable": 100
 	}
 }
+```
 
-## GET /prisoner/getFriendsById?nodeId=<nodeId>
+## GET /prisoner/getFriendsById?nodeId=\<nodeId\>
 
 Returnerer en liste av fanger som er venn med fangen med den gitte ID'en.
 
@@ -94,7 +95,7 @@ Returnerer en liste av fanger som er venn med fangen med den gitte ID'en.
 
 Legger til et fiendeskap. Se addFriendship (samme requestbody).
 
-## GET /prisoner/getEnemiesById?nodeId=<nodeId>
+## GET /prisoner/getEnemiesById?nodeId=\<nodeId\>
 
 Returnerer en liste av fanger som er fiende med fangen med den gitte ID'en.
 
