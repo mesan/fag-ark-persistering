@@ -64,26 +64,26 @@ den bli lagt til (?).
 ### Body-eksempel
 ```json
 {
-	{
-		"id": "1",
-		"name": "Billy the Kid",
-		"health": 100,
-		"isDangerous": true,
-		"hunger": 50,
-		"thirst": 20,
-		"aggression": 100,
-		"sosializable": 0
-	},
-	{
-		"id": "2",
-		"name": "Lucky Lule",
-		"health": 100,
-		"isDangerous": false,
-		"hunger": 0,
-		"thirst": 0,
-		"aggression": 20,
-		"sosializable": 100
-	}
+	"friend1": {
+					"id": "1",
+					"name": "Billy the Kid",
+					"health": 100,
+					"isDangerous": true,
+					"hunger": 50,
+					"thirst": 20,
+					"aggression": 100,
+					"sosializable": 0
+				},
+	"friend2": {
+					"id": "2",
+					"name": "Lucky Lule",
+					"health": 100,
+					"isDangerous": false,
+					"hunger": 0,
+					"thirst": 0,
+					"aggression": 20,
+					"sosializable": 100
+				}
 }
 ```
 
@@ -93,7 +93,7 @@ Returnerer en liste av fanger som er venn med fangen med den gitte ID'en.
 
 ## POST /prisoner/addEnemies
 
-Legger til et fiendeskap. Se addFriendship (samme requestbody).
+Legger til et fiendeskap. Se addFriendship (samme requestbody, men med enemy1 og 2 i stedetfor friend1 og 2).
 
 ## GET /prisoner/getEnemiesById?nodeId=\<nodeId\>
 
